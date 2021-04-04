@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from '../ui/Modal';
+import { Modal } from '../ui/modal/Modal';
 export const CandyRackScreen = () => {
   return (
     <div className='flex items-center justify-center md:h-screen  w-screen'>
@@ -18,7 +18,7 @@ export const CandyRackScreen = () => {
             </p>
           </div>
         </div>
-        <Modal title={"Wait, don't miss our deals, today only!"} />
+        <Modal />
       </div>
     </div>
   );
