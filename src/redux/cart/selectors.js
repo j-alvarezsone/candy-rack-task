@@ -4,8 +4,10 @@ const cartSelector = (state) => state.cart;
 
 export const getCarItems = createSelector([cartSelector], (state) => state.cartItems);
 
-export const getCarItemsId = createSelector([getCarItems], (cartItems) =>
-  cartItems.map((item) => item.id),
+export const getCarItemsId = createSelector([getCarItems], (cartItems) => cartItems.map((item) => item.id));
+
+export const getCarItemQuantity = createSelector([getCarItems], (cartItems) =>
+  cartItems.map((item) => item.quantity),
 );
 
 export const selectCartItemsCount = createSelector([getCarItems], (cartItems) =>

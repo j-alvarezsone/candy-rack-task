@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCurrency, getOffers } from '../../../redux/offers/selectors';
 import { fetchCurrencyAction, fetchOffersAction } from '../../../redux/offers/action';
 import { fetchCurrency, fetchOffers } from '../../../redux/offers/operations';
-import { getCarItemsId, selectOriginalPrice } from '../../../redux/cart/selectors';
+import { getCarItemQuantity, getCarItemsId, selectOriginalPrice } from '../../../redux/cart/selectors';
 import { addItem } from '../../../redux/cart/action';
 import { ModalContents } from './ModalContents';
 import { useCallback } from 'react';
@@ -19,6 +19,7 @@ export const Modal = () => {
   // Cart
   const price = selectOriginalPrice(selectors);
   const id = getCarItemsId(selectors);
+  const qty = getCarItemQuantity(selectors);
   const totalPrice = price.toLocaleString();
   // Offers
   const offers = getOffers(selectors);
@@ -42,7 +43,7 @@ export const Modal = () => {
   };
 
   const handleSubmit = () => {
-    alert(`You selected ${select.selectedValue} Bulb, product ID is ${id}`);
+    alert(`You selected ${qty} ${select.selectedValue} Bulb, product ID is ${id}`);
     setShowModal(false);
   };
 
