@@ -1,12 +1,12 @@
 import React from 'react';
 
-export const Select = ({ selectClassName, optionClassName, option1, option2, option3 }) => {
+export const Select = ({ selectClassName, optionClassName }) => {
   return (
     <>
       <select className={selectClassName}>
-        <option className={optionClassName}>{option1}</option>
-        <option className={optionClassName}>{option2}</option>
-        <option className={optionClassName}>{option3}</option>
+        <option className={optionClassName}>Regular</option>
+        <option className={optionClassName}>Medium</option>
+        <option className={optionClassName}>Large</option>
       </select>
     </>
   );

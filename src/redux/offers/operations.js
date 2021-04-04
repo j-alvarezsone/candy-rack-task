@@ -24,7 +24,7 @@ export const fetchCurrency = () => {
 
       dispatch({ type: types.FETCH_CURRENCY, payload: data.currency });
     } catch (err) {
-      dispatch({ type: types.FETCH_FAILED, payload: err });
+      dispatch({ type: types.FETCH_FAILED, payload: err.message });
     }
   };
 };

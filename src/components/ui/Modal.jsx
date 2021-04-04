@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// Components
 import { CustomButton } from './CustomButton';
 import { CustomIcon } from './CustomIcon';
 import { OffersList } from '../offers/OffersList';
+import { Select } from '../ui/Select';
+// Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrency, getOffers } from '../../redux/offers/selector';
-import { useEffect } from 'react';
+import { getCurrency, getOffers } from '../../redux/offers/selectors';
 import { fetchCurrencyAction, fetchOffersAction } from '../../redux/offers/action';
 import { fetchCurrency, fetchOffers } from '../../redux/offers/operations';
+import { selectOriginalPrice } from '../../redux/cart/selectors';
+import { addItem } from '../../redux/cart/action';
 
 export const Modal = ({ title }) => {
   const selectors = useSelector((state) => state);
   const dispatch = useDispatch();
-
+  // Cart
+  const price = selectOriginalPrice(selectors);
+  const totalPrice = price.toLocaleString();
+  // Offers
   const offers = getOffers(selectors);
   const currency = getCurrency(selectors);
 
@@ -21,6 +28,7 @@ export const Modal = ({ title }) => {
   }, [dispatch]);
 
   const [showModal, setShowModal] = useState(false);
+  const [bulbToCart, setBulbToCart] = useState([]);
 
   const handleOpen = () => {
     setShowModal(true);
@@ -33,6 +41,11 @@ export const Modal = ({ title }) => {
   const handleSubmit = () => {
     alert('Hello world');
     setShowModal(false);
+  };
+
+  const addToCart = (bulb) => {
+    setBulbToCart([...bulbToCart, bulb]);
+    dispatch(addItem(bulb));
   };
 
   return (
@@ -73,12 +86,40 @@ export const Modal = ({ title }) => {
                     </div>
                     <h4 className='ml-4'>Your cart</h4>
                   </div>
-                  <span className='text-lg mr-4 font-bold'>{}</span>
+                  <span className='text-lg mr-4 font-bold'>{totalPrice} US$</span>
                 </div>
                 {/*body*/}
                 <div className='relative p-6 flex-auto '>
-                  {offers.map((offer, index) => (
-                    <OffersList key={offer.id} offers={offer} index={index} currency={currency} />
+                  {offers.slice(0, 1).map((offer) => (
+                    <OffersList
+                      key={offer.id}
+                      offers={offer}
+                      currency={currency}
+                      badgeClassName={
+                        'absolute top-0 -left-2 lg:-left-2  bg-gray-400 rounded-full h-6 w-6 text-center'
+                      }
+                      originalPriceClassName={'text-xs font-light leading-relaxed ml-2 line-through'}
+                      quantity={bulbToCart && bulbToCart.length}
+                      handleClick={() => addToCart(offer)}
+                      select={
+                        <Select
+                          selectClassName={
+                            'border bg-white rounded px-2 py-1 outline-none mr-1 lg:mr-2 text-xs w-full sm:w-20 h-8 mb-1 lg:h-8 md:w-24'
+                          }
+                          optionClassName={'py-1'}
+                        />
+                      }
+                    />
+                  ))}
+                  {offers.slice(1).map((offer, index) => (
+                    <OffersList
+                      key={offer.id}
+                      offers={offer}
+                      originalPriceClassName={'text-xs font-light leading-relaxed ml-2'}
+                      index={index}
+                      currency={currency}
+                      handleClick={() => dispatch(addItem(offer))}
+                    />
                   ))}
                 </div>
                 {/*footer*/}
