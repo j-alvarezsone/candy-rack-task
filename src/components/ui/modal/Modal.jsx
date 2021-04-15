@@ -73,7 +73,7 @@ export const Modal = () => {
           handleClick={handleOpen}
         />
       </div>
-      {showModal ? (
+      {showModal && (
         <>
           <ModalContents
             title={"Wait, don't miss our deals, today only!"}
@@ -103,19 +103,18 @@ export const Modal = () => {
                 }
               />
             ))}
-            {offers.slice(1).map((offer, index) => (
+            {offers.slice(1).map((offer) => (
               <OffersList
                 key={offer.id}
                 offers={offer}
                 originalPriceClassName={'text-xs font-light leading-relaxed ml-2'}
-                index={index}
                 currency={currency}
                 handleClick={() => dispatch(addItem(offer))}
               />
             ))}
           </ModalContents>
         </>
-      ) : null}
+      )}
     </>
   );
 };
