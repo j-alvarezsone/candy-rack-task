@@ -13,7 +13,7 @@ export const OffersList = ({
 }) => {
   return (
     <>
-      <div className='ml-4 md:ml-4' key={offers.id}>
+      <div className='ml-4 md:ml-4'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center relative'>
             <span className={badgeClassName}>{quantity}</span>
