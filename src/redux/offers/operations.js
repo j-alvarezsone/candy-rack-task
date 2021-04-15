@@ -10,7 +10,7 @@ export const fetchOffers = () => {
 
       dispatch({ type: types.FETCH_OFFERS, payload: data.offers });
     } catch (err) {
-      dispatch({ type: types.FETCH_FAILED, payload: err });
+      dispatch({ type: types.FETCH_FAILED, payload: err.message });
     }
   };
 };
