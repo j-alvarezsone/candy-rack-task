@@ -8,23 +8,3 @@
   padding: 0;
 }
 
-.active {
-  text-decoration: line-through;
-  color: #c0c0c0;
-}
-
-.option2Hide {
-  display: none;
-}
-
-.option3Hide {
-  display: none;
-}
-
-.badge2 {
-  display: none;
-}
-
-.badge3 {
-  display: none;
-}
