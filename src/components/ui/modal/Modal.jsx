@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 // Components
 import { CustomButton } from '../CustomButton';
 import { OffersList } from '../../offers/OffersList';
 import { Select } from '../Select';
+import { ModalContents } from './ModalContents';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrency, getOffers } from '../../../redux/offers/selectors';
@@ -10,8 +11,6 @@ import { fetchCurrencyAction, fetchOffersAction } from '../../../redux/offers/ac
 import { fetchCurrency, fetchOffers } from '../../../redux/offers/operations';
 import { getCarItemQuantity, getCarItemsId, selectOriginalPrice } from '../../../redux/cart/selectors';
 import { addItem } from '../../../redux/cart/action';
-import { ModalContents } from './ModalContents';
-import { useCallback } from 'react';
 
 export const Modal = () => {
   const selectors = useSelector((state) => state);
